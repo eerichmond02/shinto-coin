@@ -45,3 +45,15 @@ td, th {
 ul {
   display: inline-block;
 }
+
+h1 {
+  margin-bottom: 20px;
+}
+
+#tableHeader {
+  background-color: lightgrey;
+}
+
+table {
+  border: 1px solid lightgrey;
+}

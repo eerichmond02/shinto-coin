@@ -1,4 +1,4 @@
-import {MINE_COINS, BUY_COINS, SELECT_TRANSACTION} from './types';
+import {MINE_COINS, BUY_COINS, SELECT_TRANSACTION, SELL_COINS} from './types';
 
 class TransactionDetail {
     constructor (action, amount, value) {
@@ -36,6 +36,14 @@ export default (state=initialState, action) => {
             case SELECT_TRANSACTION: 
             return {...state,
                     selectedTransaction: action.payload  
+            }
+            case SELL_COINS:
+            return {
+                ...state,
+                numCoins: state.numCoins - parseInt(action.payload), 
+                balance: state.balance - parseInt(action.payload) * state.curValue, 
+                curValue: state.curValue - 1,
+                transactions: state.transactions.concat(new TransactionDetail('Sold', parseInt(action.payload), state.curValue))
             }
         default:
             return state;

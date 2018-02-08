@@ -28,14 +28,14 @@ class App extends Component {
         <header>
           <div id='logo' className='icon-ill-coin'></div>
           <ul className='tabs'>
-            <CustomLink label='Home' to='/' exact={true}/>
+            <CustomLink label='Home' to='/home' exact={true}/>
             <CustomLink label='Mine Coins' to='/mine' />
             <CustomLink label='Buy Coins' to='/buy' />
             <CustomLink label='Sell Coins' to='/sell' />
-            <CustomLink label='Ledger' to='/ledger' />
+            <CustomLink label='Browse Ledger' to='/ledger' />
           </ul>
         </header>
-        <Route path='/' exact component={Home} />
+        <Route path='/home' exact component={Home} />
         <Route path='/mine' component={Mine} />
         <Route path='/buy' component={Buy} />
         <Route path='/sell' component={Sell} />

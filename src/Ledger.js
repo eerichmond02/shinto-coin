@@ -9,27 +9,30 @@ const Ledger = (props) => (
         <h1>Browse Ledger</h1>
         <p>Here you can browse all ShintoCoin transactions.</p>
         <table>
-        <tbody>
-        <tr>
-          <th>Action</th>
-          <th>Amount</th>
-          <th>Value</th>
-          <th></th>
-        </tr>
-        {props.transactions.map((transaction, idx) => (
-            <tr key={idx}>
-                <td>{transaction.action}</td>
-                <td>{transaction.amount}</td>
-                <td>{transaction.value}</td>
-                <td>
-                    <Link to={`/transaction/${transaction.id}`}>
-                        <button onClick={() => {props.selectTransaction(transaction);}}>Details</button>
-                    </Link> 
-                </td>
-            </tr>           
-        ))}
-      </tbody>
-    </table>
+            <tbody>
+              <tr>
+                <th id='tableHeader' colspan="4">ShintoCoin Ledger</th>
+              </tr>
+            <tr>
+              <th>Action</th>
+              <th>Amount</th>
+              <th>Value</th>
+              <th></th>
+            </tr>
+            {props.transactions.map((transaction, idx) => (
+                <tr key={idx}>
+                    <td>{transaction.action}</td>
+                    <td>{transaction.amount}</td>
+                    <td>{transaction.value}</td>
+                    <td>
+                        <Link to={`/transaction/${transaction.id}`}>
+                            <button onClick={() => {props.selectTransaction(transaction);}}>Details</button>
+                        </Link> 
+                    </td>
+                </tr>           
+            ))}
+          </tbody>
+        </table>
     </div>
 )
 
