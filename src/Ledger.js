@@ -11,7 +11,7 @@ const Ledger = (props) => (
         <table>
             <tbody>
               <tr>
-                <th id='tableHeader' colspan="4">ShintoCoin Ledger</th>
+                <th id='tableHeader' colSpan="4">ShintoCoin Ledger</th>
               </tr>
             <tr>
               <th>Action</th>

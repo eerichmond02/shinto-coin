@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {mineCoins} from './state/actions'
+import { Toast, showToast } from './toast'
 
 const QuesAns = [
                     {question: 'What is the 7th Fibonnacci sequence number?', answer: '8'},
@@ -15,7 +16,8 @@ class Mine extends Component {
         super (props);
         this.state = {
             inputVal: '',
-            chosenQuestion: undefined
+            chosenQuestion: undefined,
+            message: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.chooseQuestion = this.chooseQuestion.bind(this);
@@ -35,15 +37,31 @@ class Mine extends Component {
     }
 
     render () {
-    return (
-    <div>
-        <h1>Mine ShintoCoins</h1>
-        <p>Here you can mine ShintoCoins by being the first to solve the algorithm:</p>
-        <p>{this.state.chosenQuestion && this.state.chosenQuestion.question}</p>
-        <input name='inputVal' placeholder='Number' type='number' onChange={this.handleChange} value={this.state.inputVal}/>
-        <button onClick={() => {if (this.state.inputVal === this.state.chosenQuestion.answer) {this.props.mineCoins(); this.chooseQuestion() }}}>Mine</button>
-    </div>
-    )
+        return (
+        <div>
+            <h1>Mine ShintoCoins</h1>
+            <p>Here you can mine ShintoCoins by being the first to solve the algorithm:</p>
+            <p>{this.state.chosenQuestion && this.state.chosenQuestion.question}</p>
+            <div className='form'>
+                <input className='small-8 columns' name='inputVal' placeholder='Number' type='number' onChange={this.handleChange} value={this.state.inputVal}/>
+                <button data-open="exampleModal1" className='small-3 columns' onClick={() => 
+                    {if (this.state.inputVal === this.state.chosenQuestion.answer) {
+                        this.props.mineCoins();
+                        this.chooseQuestion();
+                        this.setState({message: 'Success! You mined one coin.'}, function() {
+                            showToast();
+                        })
+                    } else {
+                        this.chooseQuestion();
+                        this.setState({message: 'Sorry, you did not answer correctly. Please try again!'}, function() {
+                            showToast();
+                        })
+                    }
+                }}>Mine</button>
+            </div>
+            <Toast message={this.state.message} />
+        </div>
+        )
     }
 }
 

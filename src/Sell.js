@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { sellCoins } from './state/actions'
+import { sellCoins } from './state/actions';
+import { Toast, showToast } from './toast';
 
 class Sell extends Component {
     constructor (props) {
         super(props);
         this.state = {
             inputVal: '',
-            validated: false
+            validated: false,
+            message: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.validate = this.validate.bind(this);
@@ -30,11 +32,20 @@ class Sell extends Component {
     render() {
         return (
         <div>
-        <h1>Sell ShintoCoins</h1>
-        <p>Current ShintoCoin Value: ${this.props.curValue}</p>
-        <p>Number of ShintoCoins Owned: {this.props.numCoins}</p>
-        <input name='inputVal' type='number' onChange={this.handleChange} value={this.state.inputVal} placeholder='Number'/>
-        <button disabled={!this.state.validated} onClick={() => {this.props.sellCoins(this.state.inputVal); this.setState({inputVal: ''}) }}>Sell</button>
+	        <h1>Sell ShintoCoins</h1>
+	        <p>Current ShintoCoin Value: ${this.props.curValue}</p>
+	        <p>Number of ShintoCoins Owned: {this.props.numCoins}</p>
+	        <div className='form'>
+	        	<input className='small-8 columns'name='inputVal' type='number' onChange={this.handleChange} value={this.state.inputVal} placeholder='Number'/>
+	        	<button className='small-3 columns'disabled={!this.state.validated} onClick={() => {
+	        		this.props.sellCoins(this.state.inputVal);
+                    this.setState({message: 'You sold ' + this.state.inputVal + ' coin(s)!'}, function() {
+                            showToast();
+                        })
+	        		this.setState({inputVal: ''}) 
+	        	}}>Sell</button>
+	        </div>
+	        <Toast message={this.state.message} />
         </div>
         )
     }
