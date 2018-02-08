@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 const LedgerTransactionDetails = props => (
         <div>
             <h1>Ledger Transaction Details</h1>
-            <h2>Detailed View of a transaction from the ledger.</h2>
+            <p>Detailed View of a transaction from the ledger.</p>
             <p>Transaction #: {props.selectedTransaction.id}</p>
             <p>{props.selectedTransaction.action} {props.selectedTransaction.amount} ShintoCoin(s)</p>
         </div>

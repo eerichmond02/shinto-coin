@@ -7,7 +7,7 @@ import LedgerTransactionDetails from './LedgerTransactionDetails'
 const Ledger = (props) => (
     <div>
         <h1>Browse Ledger</h1>
-        <h2>Here you can browse all ShintoCoin transactions.</h2>
+        <p>Here you can browse all ShintoCoin transactions.</p>
         <table>
         <tbody>
         <tr>
@@ -17,23 +17,19 @@ const Ledger = (props) => (
           <th></th>
         </tr>
         {props.transactions.map((transaction, idx) => (
-            <tr>
+            <tr key={idx}>
                 <td>{transaction.action}</td>
                 <td>{transaction.amount}</td>
                 <td>{transaction.value}</td>
                 <td>
                     <Link to={`/transaction/${transaction.id}`}>
-                    <button onClick={() => {props.selectTransaction(transaction); props.history.push(`/transaction/${transaction.id}`)}}>Details</button>
-                    </Link>
+                        <button onClick={() => {props.selectTransaction(transaction);}}>Details</button>
+                    </Link> 
                 </td>
             </tr>           
-        )
-
-        )}
+        ))}
       </tbody>
     </table>
-
-    <Route path="/transaction/:id" component={LedgerTransactionDetails} />
     </div>
 )
 
